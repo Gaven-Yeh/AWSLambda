@@ -58,19 +58,19 @@ steps:
   inputs:
     awsCredentials: 'aws-gaven.yeh'
     regionName: 'ap-southeast-1'
-    bucketName: 'gaven.yeh-test'
+    bucketName: 'gaven-test'
     sourceFolder: '$(Build.ArtifactStagingDirectory)'
     globExpressions: '**aws.jar'
 - task: LambdaDeployFunction@1
   inputs:
     awsCredentials: 'aws-gaven.yeh'
-    regionName: 'us-east-2'
+    regionName: 'ap-southeast-1'
     deploymentMode: 'codeandconfiguration'
     functionName: 'gavenFunction'
     functionHandler: 'com.example.cloudfunctions.MyStringHandlers'
     runtime: 'java11'
     codeLocation: 's3object'
-    s3Bucket: 'gaven.yeh-test'
+    s3Bucket: 'gaven-test'
     s3ObjectKey: 'cloud-functions-0.0.1-SNAPSHOT-aws.jar'
     roleARN: 'lambda_basic_execution'
     environment: 'FUNCTION_NAME=greeter'

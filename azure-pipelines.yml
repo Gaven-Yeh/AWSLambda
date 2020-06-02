@@ -18,7 +18,7 @@ steps:
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
-    options: 'spring-boot:build-image -Dspring-boot.build-image.imageName=gavenyeh/awslambda -Dspring-boot.build-image.tag=docker.io/gavenyeh/awslambda:latest'
+    options: 'spring-boot:build-image -Dspring-boot.build-image.tag=docker.io/gavenyeh/awslambda:latest'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'

@@ -82,11 +82,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<image>
-						<name>docker.io/gavenyeh/awslambda</name>
-					</image>
-				</configuration>
+<!--				<configuration>-->
+<!--					<image>-->
+<!--						<name>docker.io/gavenyeh/awslambda</name>-->
+<!--					</image>-->
+<!--				</configuration>-->
 				<dependencies>
 					<dependency>
 						<groupId>org.springframework.boot.experimental</groupId>

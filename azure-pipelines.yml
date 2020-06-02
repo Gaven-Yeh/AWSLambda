@@ -10,13 +10,15 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'Personal SonarCloud'
+    organization: 'gaven-accenture-training'
+    scannerMode: 'Other'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
-    options: >
-      spring-boot:build-image
-      -Dspring-boot.build-image.tag=docker.io/gavenyeh/awslambda:latest
-      -Dspring-boot.build-image.imageName=gavenyeh/awslambda:latest
+    options: 'spring-boot:build-image -Dspring-boot.build-image.tag=docker.io/gavenyeh/awslambda:latest -Dspring-boot.build-image.imageName=gavenyeh/awslambda:latest'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
@@ -25,8 +27,11 @@ steps:
     mavenOptions: '-Xmx3072m'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: false
-
+    sonarQubeRunAnalysis: true
+    sqMavenPluginVersionChoice: 'latest'
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
 - task: Docker@2
   displayName: Login to Docker Hub
   inputs:

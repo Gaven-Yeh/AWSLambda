@@ -18,7 +18,7 @@ steps:
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
-    options: 'spring-boot:build-image -Dspring-boot.build-image.tag=docker.io/gavenyeh/awslambda:latest -Dspring-boot.build-image.imageName=gavenyeh/awslambda:latest'
+    options: 'spring-boot:build-image -Dspring-boot.build-image.tag=docker.io/gavenyeh/awslambda:latest -Dspring-boot.build-image.imageName=gavenyeh/awslambda'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
@@ -56,4 +56,10 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'lambda'
     publishLocation: 'Container'
-
+- task: S3Upload@1
+  inputs:
+    awsCredentials: 'aws-gaven.yeh'
+    regionName: 'ap-southeast-1'
+    bucketName: 'gaven.yeh-test'
+    sourceFolder: '$(Build.ArtifactStagingDirectory)'
+    globExpressions: '**aws.jar'

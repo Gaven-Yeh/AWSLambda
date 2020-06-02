@@ -73,4 +73,4 @@ steps:
     s3Bucket: 'gaven-test'
     s3ObjectKey: 'cloud-functions-0.0.1-SNAPSHOT-aws.jar'
     roleARN: 'lambda_basic_execution'
-    environment: 'FUNCTION_NAME=greeter'
+    environment: 'FUNCTION_NAME=reverseString'

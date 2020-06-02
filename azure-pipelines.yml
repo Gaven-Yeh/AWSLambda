@@ -10,15 +10,14 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- task: SonarCloudPrepare@1
-  inputs:
-    SonarCloud: 'Personal SonarCloud'
-    organization: 'gaven-accenture-training'
-    scannerMode: 'Other'
+# - task: SonarCloudPrepare@1
+#   inputs:
+#     SonarCloud: 'Personal SonarCloud'
+#     organization: 'gaven-accenture-training'
+#     scannerMode: 'Other'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
-    # options: 'spring-boot:build-image -Dspring-boot.build-image.tag=docker.io/gavenyeh/awslambda:latest'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     javaHomeOption: 'JDKVersion'
@@ -27,11 +26,10 @@ steps:
     mavenOptions: '-Xmx3072m'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: true
-    sqMavenPluginVersionChoice: 'latest'
-- task: SonarCloudPublish@1
-  inputs:
-    pollingTimeoutSec: '300'
+    sonarQubeRunAnalysis: false
+# - task: SonarCloudPublish@1
+#   inputs:
+#     pollingTimeoutSec: '300'
 # - task: Docker@2
 #   displayName: Login to Docker Hub
 #   inputs:
@@ -66,7 +64,7 @@ steps:
 - task: LambdaDeployFunction@1
   inputs:
     awsCredentials: 'aws-gaven.yeh'
-    regionName: 'ap-southeast-1'
+    regionName: 'us-east-2'
     deploymentMode: 'codeandconfiguration'
     functionName: 'gavenFunction'
     functionHandler: 'com.example.cloudfunctions.MyStringHandlers'

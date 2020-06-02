@@ -73,4 +73,6 @@ steps:
     s3Bucket: 'gaven-test'
     s3ObjectKey: 'cloud-functions-0.0.1-SNAPSHOT-aws.jar'
     roleARN: 'lambda_basic_execution'
+    memorySize: '512'
+    timeout: '15'
     environment: 'FUNCTION_NAME=reverseString'
